@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentHub - Student Shopping & Book Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <div class="logo">🎓 StudentHub</div>
+
+        <nav>
+    <a href="#home">Home</a>
+    <a href="#categories">Categories</a>
+    <a href="#products">Products</a>
+    <a href="#books">Books</a>
+    <a href="#wishlist">❤️ Wishlist</a>
+    <a href="#about">About</a>
+    <a href="#orders">My Orders</a>
+    <a href="#contact">Contact</a>
+
+</nav>
+
+        <div class="nav-actions">
+
+    <span id="userWelcome"></span>
+
+    <button id="loginButton" onclick="openLogin()">
+        👤 Login
+    </button>
+
+    <button
+        id="logoutButton"
+        onclick="logoutUser()"
+        style="display: none;">
+        🚪 Logout
+    </button>
+
+    <button onclick="showCart()">
+        🛒 Cart <span id="cartCount">0</span>
+    </button>
+
+</div>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Everything Students Need</h1>
+
+            <p>
+                Books, stationery, electronics and college essentials
+                all in one place.
+            </p>
+
+            <a href="#products" class="shop-btn">Shop Now</a>
+        </div>
+
+        <div class="hero-image">
+            🎓📚💻🎒
+        </div>
+    </section>
+
+
+    <!-- Search -->
+    <section class="search-section">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔍 Search books, stationery, electronics..."
+            onkeyup="searchProducts()"
+        >
+    </section>
+
+
+    <!-- Categories -->
+    <section id="categories">
+        <h2>Shop By Category</h2>
+
+        <div class="category-container">
+
+            <div class="category-card" onclick="filterCategory('Books')">
+                <span>📚</span>
+                <h3>Books</h3>
+                <p>Academic & General Books</p>
+            </div>
+
+            <div class="category-card" onclick="filterCategory('Stationery')">
+                <span>✏️</span>
+                <h3>Stationery</h3>
+                <p>Study & Writing Essentials</p>
+            </div>
+
+            <div class="category-card" onclick="filterCategory('Electronics')">
+                <span>💻</span>
+                <h3>Electronics</h3>
+                <p>Useful Student Gadgets</p>
+            </div>
+
+            <div class="category-card" onclick="filterCategory('College')">
+                <span>🎒</span>
+                <h3>College Essentials</h3>
+                <p>Everything for Campus</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Products -->
+    <section id="products">
+        <h2>Popular Products</h2>
+
+        <div class="product-container" id="productContainer">
+
+            <!-- Product 1 -->
+            <div class="product-card" data-category="Books"
+     onclick="showProductDetails(
+        'Java Programming Book',
+        499,
+        'images/java-book.jpg',
+        'Complete Java programming book for students and beginners.'
+     )">
+                <div class="product-image">
+    <img src="images/java-book.jpg" alt="Java Programming Book">
+</div>
+
+                <h3>Java Programming Book</h3>
+
+                <p class="category">Books</p>
+                <div class="product-rating">
+                    ⭐⭐⭐⭐⭐
+                    <span>(4.8)</span>
+                </div>
+
+                <p class="price">₹499</p>
+
+                <button onclick="addToCart('Java Programming Book', 499)">
+                    Add to Cart
+                </button>
+
+                <button class="wishlist" onclick="addWishlist('Java Programming Book')">
+                    ❤️
+                </button>
+            </div>
+
+
+            <!-- Product 2 -->
+            <div class="product-card" data-category="Books"
+     onclick="showProductDetails(
+        'Database Management System',
+        399,
+        'images/dbms-book.jpg',
+        'Useful DBMS book for college students and computer science learners.'
+     )">
+                <div class="product-image">
+    <img src="images/dbms-book.jpg" alt="Database Management System">
+</div>
+
+                <h3>Database Management System</h3>
+
+                <p class="category">Books</p>
+                <div class="product-rating">
+    ⭐⭐⭐⭐☆
+    <span>(4.5)</span>
+</div>
+
+                <p class="price">₹399</p>
+
+                <button onclick="addToCart('Database Management System', 399)">
+                    Add to Cart
+                </button>
+
+                <button class="wishlist" onclick="addWishlist('Database Management System')">
+                    ❤️
+                </button>
+            </div>
+
+
+            <!-- Product 3 -->
+
+<div class="product-card"
+     data-category="Stationery"
+     onclick="showProductDetails(
+        'Student Notebook',
+        120,
+        'images/notebook.jpg',
+        'High-quality notebook for college notes and daily study.'
+     )">
+
+    <div class="product-image">
+
+        <img
+            src="images/notebook.jpg"
+            alt="Student Notebook"
+        >
+
+    </div>
+
+    <h3>Student Notebook</h3>
+
+    <p class="category">Stationery</p>
+    <div class="product-rating">
+    ⭐⭐⭐⭐⭐
+    <span>(4.7)</span>
+</div>
+
+    <p class="price">₹120</p>
+
+    <button
+        onclick="event.stopPropagation(); addToCart('Student Notebook', 120)">
+        Add to Cart
+    </button>
+
+    <button
+        class="wishlist"
+        onclick="event.stopPropagation(); addWishlist('Student Notebook')">
+        ❤️
+    </button>
+
+</div>
+                
+
+
+            <!-- Product 4 -->
+            <div class="product-card" data-category="Stationery"
+     onclick="showProductDetails(
+        'Premium Pen Set',
+        150,
+        'images/pen.jpg',
+        'Smooth writing premium pen set for students.'
+     )">
+                <div class="product-image">
+    <img src="images/pen.jpg" alt="Premium Pen Set">
+</div>
+
+                <h3>Premium Pen Set</h3>
+
+                <p class="category">Stationery</p>
+                <div class="product-rating">
+    ⭐⭐⭐⭐☆
+    <span>(4.4)</span>
+</div>
+
+                <p class="price">₹150</p>
+
+                <button onclick="addToCart('Premium Pen Set', 150)">
+                    Add to Cart
+                </button>
+
+                <button class="wishlist" onclick="addWishlist('Premium Pen Set')">
+                    ❤️
+                </button>
+            </div>
+
+
+            <!-- Product 5 -->
+            <div class="product-card" data-category="Electronics"
+     onclick="showProductDetails(
+        'Wireless Headphones',
+        999,
+        'images/headphones.jpg',
+        'Comfortable wireless headphones for study and entertainment.'
+     )">
+                <div class="product-image">
+    <img src="images/headphones.jpg" alt="Wireless Headphones">
+</div>
+
+                <h3>Wireless Headphones</h3>
+
+                <p class="category">Electronics</p>
+
+                <p class="price">₹999</p>
+
+                <button onclick="addToCart('Wireless Headphones', 999)">
+                    Add to Cart
+                </button>
+
+                <button class="wishlist" onclick="addWishlist('Wireless Headphones')">
+                    ❤️
+                </button>
+            </div>
+
+
+            <!-- Product 6 -->
+            <div class="product-card" data-category="Electronics"
+     onclick="showProductDetails(
+        'Wireless Mouse',
+        599,
+        'images/mouse.jpg',
+        'Smooth and comfortable wireless mouse for laptops and computers.'
+     )">
+                <div class="product-image">
+    <img src="images/mouse.jpg" alt="Wireless Mouse">
+</div>
+
+                <h3>Wireless Mouse</h3>
+
+                <p class="category">Electronics</p>
+
+                <p class="price">₹599</p>
+
+                <button onclick="addToCart('Wireless Mouse', 599)">
+                    Add to Cart
+                </button>
+
+                <button class="wishlist" onclick="addWishlist('Wireless Mouse')">
+                    ❤️
+                </button>
+            </div>
+
+
+            <!-- Product 7 -->
+            <div class="product-card" data-category="College"
+     onclick="showProductDetails(
+        'College Backpack',
+        799,
+        'images/backback.jpg',
+        'Spacious backpack suitable for college books and daily essentials.'
+     )">
+                <div class="product-image">
+    <img src="images/backback.jpg" alt="College Backpack">
+</div>
+
+                <h3>College Backpack</h3>
+
+                <p class="category">College Essentials</p>
+
+                <p class="price">₹799</p>
+
+                <button onclick="addToCart('College Backpack', 799)">
+                    Add to Cart
+                </button>
+
+                <button class="wishlist" onclick="addWishlist('College Backpack')">
+                    ❤️
+                </button>
+            </div>
+
+
+            <!-- Product 8 -->
+            <div class="product-card" data-category="College"
+     onclick="showProductDetails(
+        'Student Water Bottle',
+        299,
+        'images/bottle.jpg',
+        'Reusable water bottle suitable for college and travel.'
+     )">>
+                <div class="product-image">
+    <img src="images/bottle.jpg" alt="Student Water Bottle">
+</div>
+
+                <h3>Student Water Bottle</h3>
+
+                <p class="category">College Essentials</p>
+
+                <p class="price">₹299</p>
+
+                <button onclick="addToCart('Student Water Bottle', 299)">
+                    Add to Cart
+                </button>
+
+                <button class="wishlist" onclick="addWishlist('Student Water Bottle')">
+                    ❤️
+                </button>
+            </div>
+
+        </div>
+    </section>
+    <!-- Reviews Section -->
+
+<section id="reviews" class="reviews-section">
+
+    <h2>⭐ Customer Reviews</h2>
+
+    <div class="review-form">
+
+        <input
+            type="text"
+            id="reviewName"
+            placeholder="Enter your name"
+        >
+
+       <label for="reviewProduct">Select Product</label>
+
+<select id="reviewProduct">
+
+    <option value="Java Programming Book">
+        Java Programming Book
+    </option>
+
+    <option value="Database Management System">
+        Database Management System
+    </option>
+
+    <option value="Student Notebook">
+        Student Notebook
+    </option>
+
+    <option value="Premium Pen Set">
+        Premium Pen Set
+    </option>
+
+    <option value="Wireless Headphones">
+        Wireless Headphones
+    </option>
+
+    <option value="Wireless Mouse">
+        Wireless Mouse
+    </option>
+
+    <option value="College Backpack">
+        College Backpack
+    </option>
+
+    <option value="Student Water Bottle">
+        Student Water Bottle
+    </option>
+
+</select>
+ <select id="reviewRating">
+            <option value="5">⭐⭐⭐⭐⭐ 5 Stars</option>
+            <option value="4">⭐⭐⭐⭐ 4 Stars</option>
+            <option value="3">⭐⭐⭐ 3 Stars</option>
+            <option value="2">⭐⭐ 2 Stars</option>
+            <option value="1">⭐ 1 Star</option>
+        </select>
+
+        <textarea
+            id="reviewText"
+            placeholder="Write your review..."
+            rows="4">
+        </textarea>
+
+        <button onclick="addReview()">
+            ⭐ Submit Review
+        </button>
+
+    </div>
+
+    <div id="reviewsContainer">
+
+        <p class="no-reviews">
+            No reviews yet.
+        </p>
+
+    </div>
+
+</section>
+
+
+    <!-- Books Section -->
+    <section id="books" class="books-section">
+
+        <h2>📚 Featured Books</h2>
+
+        <p>
+            Find useful books for programming, DBMS, web development,
+            mathematics and more.
+        </p>
+
+        <button onclick="filterCategory('Books')">
+            View Books
+        </button>
+
+    </section>
+
+
+    <!-- Wishlist Section -->
+
+<section id="wishlist" class="wishlist-section">
+
+    <h2>❤️ My Wishlist</h2>
+
+    <div id="wishlistItems" class="wishlist-container">
+
+        <p>Your wishlist is empty.</p>
+
+    </div>
+
+</section>
+
+    <section id="about" class="about">
+
+        <h2>About StudentHub</h2>
+
+        <p>
+            StudentHub is a one-stop online shopping platform designed
+            especially for students. Students can purchase books,
+            stationery, electronics and college essentials from one place.
+        </p>
+
+    </section>
+
+
+    <!-- Login Modal -->
+
+<div class="modal" id="loginModal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeLogin()">&times;</span>
+
+        <h2>🎓 Student Login</h2>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter Email"
+        >
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter Password"
+        >
+
+        <button type="button" onclick="loginUser()">
+            Login
+        </button>
+
+        <p>
+            Don't have an account?
+            <a href="#" onclick="registerUser(); return false;">
+                Register
+            </a>
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- Register Modal -->
+
+<div class="modal" id="registerModal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeRegister()">&times;</span>
+
+        <h2>📝 Student Register</h2>
+
+        <input
+            type="text"
+            id="registerName"
+            placeholder="Enter Full Name"
+        >
+
+        <input
+            type="email"
+            id="registerEmail"
+            placeholder="Enter Email"
+        >
+
+        <input
+            type="password"
+            id="registerPassword"
+            placeholder="Create Password"
+        >
+
+        <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm Password"
+        >
+
+       <button type="button" onclick="registerAccount()">
+    Create Account
+</button>
+        <p>
+            Already have an account?
+            <a href="#" onclick="backToLogin(); return false;">
+                Login
+            </a>
+        </p>
+
+    </div>
+
+</div>
+
+    <!-- Product Details Modal -->
+
+<div class="modal" id="productModal">
+
+    <div class="product-details">
+
+        <span class="close" onclick="closeProductDetails()">
+            &times;
+        </span>
+
+        <img id="detailImage" src="" alt="Product">
+
+        <div class="detail-info">
+
+            <h2 id="detailName">Product Name</h2>
+
+            <div class="rating">
+                ⭐⭐⭐⭐⭐
+            </div>
+
+            <h3 id="detailPrice">₹0</h3>
+
+            <p id="detailDescription">
+                Product description
+            </p>
+
+            <div class="quantity-box">
+
+                <button onclick="decreaseQuantity()">−</button>
+
+                <span id="quantity">1</span>
+
+                <button onclick="increaseQuantity()">+</button>
+
+            </div>
+
+            <button
+                class="detail-cart-btn"
+                onclick="addDetailToCart()">
+                🛒 Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- Register Modal -->
+
+<div class="modal" id="registerModal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeRegister()">&times;</span>
+
+        <h2>📝 Create Account</h2>
+
+        <input
+            type="text"
+            id="registerName"
+            placeholder="Enter Your Name"
+        >
+
+        <input
+            type="email"
+            id="registerEmail"
+            placeholder="Enter Email"
+        >
+
+        <input
+            type="password"
+            id="registerPassword"
+            placeholder="Create Password"
+        >
+
+        <button onclick="registerAccount()">
+            Create Account
+        </button>
+
+        <p>
+            Already have an account?
+            <a href="#" onclick="showLoginFromRegister()">
+                Login
+            </a>
+        </p>
+
+    </div>
+
+</div>
+<!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+
+        <div class="modal-content cart-content">
+
+            <span class="close" onclick="closeCart()">&times;</span>
+
+            <h2>🛒 Your Cart</h2>
+
+            <div id="cartItems">
+                <p>Your cart is empty.</p>
+            </div>
+
+            <h3 id="cartTotal">Total: ₹0</h3>
+
+            <button onclick="checkout()">Checkout</button>
+
+        </div>
+
+    </div>
+    <!-- Checkout Modal -->
+
+<div class="modal" id="checkoutModal">
+
+    <div class="modal-content checkout-content">
+
+        <span class="close" onclick="closeCheckout()">&times;</span>
+
+        <h2>🛒 Checkout</h2>
+
+        <input
+            type="text"
+            id="customerName"
+            placeholder="Enter Full Name"
+        >
+
+        <input
+            type="email"
+            id="customerEmail"
+            placeholder="Enter Email"
+        >
+
+        <input
+            type="text"
+            id="customerPhone"
+            placeholder="Enter Phone Number"
+        >
+
+        <textarea
+            id="customerAddress"
+            placeholder="Enter Delivery Address"
+            rows="4">
+        </textarea>
+        <h3>💳 Payment Method</h3>
+
+<div class="payment-options">
+
+    <label>
+        <input type="radio" name="payment" value="COD" checked>
+        💵 Cash on Delivery
+    </label>
+
+    <label>
+        <input type="radio" name="payment" value="UPI">
+        📱 UPI
+    </label>
+
+    <label>
+        <input type="radio" name="payment" value="Card">
+        💳 Card
+    </label>
+
+</div>
+
+        <h3 id="checkoutTotal">Total: ₹0</h3>
+
+        <button onclick="placeOrder()">
+            📦 Place Order
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- Order Success Modal -->
+
+<div class="modal" id="successModal">
+
+    <div class="modal-content success-content">
+
+        <h2>🎉 Order Placed!</h2>
+
+        <p>
+            Thank you for shopping with StudentHub.
+        </p>
+
+        <p>
+            Your order has been placed successfully.
+        </p>
+
+        <button onclick="closeSuccess()">
+            Continue Shopping
+        </button>
+
+    </div>
+
+</div>
+<!-- My Orders Section -->
+
+<section id="orders" class="orders-section">
+
+    <h2>📦 My Orders</h2>
+
+    <div id="ordersContainer">
+
+        <p class="no-orders">
+            No orders placed yet.
+        </p>
+
+    </div>
+
+</section>
+<!-- Contact Us Section -->
+
+<section id="contact" class="contact-section">
+
+    <h2>📞 Contact Us</h2>
+
+    <p class="contact-intro">
+        Have any questions? We are happy to help you!
+    </p>
+
+    <div class="contact-container">
+
+        <div class="contact-info">
+
+            <h3>📩 Get In Touch</h3>
+
+            <p>📧 Email: studenthub@gmail.com</p>
+
+            <p>📞 Phone: +91 98765 43210</p>
+
+            <p>📍 Location: Chennai, Tamil Nadu</p>
+
+        </div>
+
+
+        <div class="contact-form">
+
+            <input
+                type="text"
+                id="contactName"
+                placeholder="Enter Your Name"
+            >
+
+            <input
+                type="email"
+                id="contactEmail"
+                placeholder="Enter Your Email"
+            >
+
+            <textarea
+                id="contactMessage"
+                rows="5"
+                placeholder="Write your message..."
+            ></textarea>
+
+            <button onclick="sendMessage()">
+                📤 Send Message
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+    <!-- Footer -->
+
+<footer class="main-footer">
+
+    <div class="footer-container">
+
+        <div class="footer-box">
+
+            <h3>🎓 StudentHub</h3>
+
+            <p>
+                Student's One-Stop Online Shopping Platform
+            </p>
+
+        </div>
+
+
+        <div class="footer-box">
+
+            <h3>Quick Links</h3>
+
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#books">Books</a>
+            <a href="#wishlist">Wishlist</a>
+
+        </div>
+
+
+        <div class="footer-box">
+
+            <h3>Customer Support</h3>
+
+            <a href="#contact">Contact Us</a>
+            <a href="#orders">My Orders</a>
+            <a href="#about">About Us</a>
+
+        </div>
+
+
+        <div class="footer-box">
+
+            <h3>Contact</h3>
+
+            <p>📧 studenthub@gmail.com</p>
+            <p>📞 +91 98765 43210</p>
+            <p>📍 Tamil Nadu, India</p>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 StudentHub. All Rights Reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+
+    <script src="script.js"></script>
+    <!-- Elegant Notification -->
+
+<div class="notification-overlay" id="notificationModal">
+
+    <div class="notification-box">
+
+        <div class="notification-icon" id="notificationIcon">
+            ✓
+        </div>
+
+        <h2 id="notificationTitle">
+            Success!
+        </h2>
+
+        <p id="notificationMessage">
+            Action completed successfully.
+        </p>
+
+        <button onclick="closeNotification()">
+            OK
+        </button>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+
